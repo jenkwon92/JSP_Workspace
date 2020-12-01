@@ -7,7 +7,7 @@
 </head>
 <body>
 	<table border="1px" width="200px">
-		<%for(int i=1; i<=20; i++){%>
+		<%for(int i=1; i<=3; i++){%>
 		<tr>
 			<td>box</td>
 		</tr>
