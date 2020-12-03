@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ page import="db.DBManager"%>
 <%@ page import="java.sql.*"%>
+<%@ include file="/inc/lib.jsp"%>
 <%
 	/*
 	수정 요청을 처리하는 jsp ... 수정 후 상세보기 페이지로 전환할 것이므로,
@@ -11,9 +12,9 @@
 	String title  = request.getParameter("title"); //제목
 	String content  = request.getParameter("content"); //내용
 	String notice_id  = request.getParameter("notice_id"); //notice_id
-	String sql="UPDATE notice SET author='"+author+"', title='"+title+"', content='"+content+"' ";
-	sql += " WHERE notice_id="notice_id;
+	String sql="UPDATE notice SET author='"+author+"', title='"+title+"', content='"+content+"'";
 
+	sql += " WHERE notice_id="+notice_id;
 	out.print("수정에 사용할 SQL문: "+sql);
 	
 	DBManager dbManager = new DBManager();
@@ -25,15 +26,9 @@
 	int result = pstmt.executeUpdate(); //DML쿼리수행
 
 	if(result==0){
-		out.print("<script>");
-		out.print("alert('수정실패');");
-		out.print("history.back();");
-		out.print("</script>");
+		out.print(getMsgBack("수정실패"));
 	}else{
-		out.print("<script>");
-		out.print("alert('수정성공');");
-		out.print("location.href='/board/detail.jsp?notice_id='"+notice_id+";"); //게시물 한 건을 보기 위한 링크
-		out.print("</script>");
+		out.print(getMsgURL("수정성공","/board/detail.jsp?notice_id="+notice_id));
 	}
 	dbManager.release(con,pstmt); //자원해제
 

@@ -74,24 +74,25 @@ $(function(){
 		location.href="/board/list.jsp";
 	});
 
-		$($("input[type='button']")[1]).click(function(){ //수정요청
+	$($("input[type='button']")[1]).click(function(){ //수정요청
 		//입력양식을 서버에 전송!!
 		if(confirm("수정하시겠어요?")){
 			$("form").attr({
 				method:"post",
 				action:"/board/edit.jsp"
-			}
-		});
-		$("form").submit(); //전송행위!!!
+			});
+			$("form").submit(); //전송행위!!!
+		}
 	});
 
-		$($("input[type='button']")[2]).click(function(){ //삭제요청
-		//입력양식을 서버에 전송!!
-		$("form").attr({
-			method:"get",
-			action:"/board/regist.jsp"
-		});
-		$("form").submit(); //전송행위!!!
+	$($("input[type='button']")[2]).click(function(){ //삭제요청
+		if(confirm("삭제하시겠습니까?")){
+			$("form").attr({
+				method:"post",
+				action:"/board/delete.jsp"
+			});
+			$("form").submit(); //전송행위!!!
+		}
 	});
 });
 </script>
@@ -99,7 +100,8 @@ $(function(){
 <body>
 
 <div class="container">
-	<input type="hidden" name="notice_id" value="<%=rs.getString("notice_id")%>">
+ <form>
+	<input type="hidden" name="notice_id" value="<%=rs.getInt("notice_id")%>">
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="author" value="<%=rs.getString("author")%>">
 
@@ -115,10 +117,10 @@ $(function(){
   </form>
 </div>
 <div style="text-align:center">
-	Copyright all reserved java board
+	<%@ include file="/inc/footer.jsp"%>
 </div>
 </body>
 </html>
 <%
-	dbManager.release(con,pstmt,rs);
+	dbManager.release(con ,pstmt ,rs);
 %>

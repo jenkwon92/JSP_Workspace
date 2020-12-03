@@ -83,7 +83,7 @@ $(function(){
   </tr>
   <tr>
 	<td colspan="5" style="text-align:center">
-		Copyright all reserved java board
+		<%@ include file="/inc/footer.jsp"%>
 	</td>
   </tr>
 </table>
