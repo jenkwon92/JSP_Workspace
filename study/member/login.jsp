@@ -41,7 +41,7 @@
 
 		//쿼리문 수행
 		String sql ="SELECT * FROM shop_member WHERE mid=? and pass=?";
-		pstmt = con.preparedStatement(sql); //쿼리준비
+		pstmt = con.prepareStatement(sql); //쿼리준비
 		pstmt.setString(1, id);
 		pstmt.setString(2, pass);
 		rs = pstmt.executeQuery();
@@ -51,17 +51,15 @@
 		}else{
 			out.print("로그인 정보가 올바르지 않습니다");
 		}
-
-		if(rs!= null){
+	}
+	if(rs!= null){
 			rs.close();
 		}
 		if(pstmt!= null){
 			pstmt.close();
 		}
-		is(con!=null){
+		if(con!=null){
 			con.close();
 		}
-
-	}
 
 %>
